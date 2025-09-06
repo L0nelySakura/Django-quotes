@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Дашборд цитат</title>
+</head>
+<body>
+    <h1>Топ цитат</h1>
+
+    <form method="get">
+        <input type="text" name="source" placeholder="Фильтр по источнику" value="{{ source_filter }}">
+        <button type="submit">Фильтровать</button>
+    </form>
+
+    <table class="bordered-table">
+        <thead>
+            <tr>
+                <th>Цитата</th>
+                <th>Источник</th>
+                <th>Просмотры</th>
+                <th>Лайки</th>
+                <th>Дизлайки</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quote in popular_quotes %}
+            <tr>
+                <td>{{ quote.text }}</td>
+                <td>{{ quote.source }}</td>
+                <td>{{ quote.views }}</td>
+                <td>{{ quote.likes }}</td>
+                <td>{{ quote.dislikes }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">Цитаты не найдены</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{% url 'random_quote' %}">Случайная цитата</a>
+    <br>
+    <a href="{% url 'quote_list' %}">Список цитат</a>
+    <br>
+    <a href="{% url 'add_quote' %}">Добавить цитату</a>
+</body>
+</html>

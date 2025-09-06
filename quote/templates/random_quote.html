@@ -1,0 +1,30 @@
+<head>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <h2>Случайная цитата</h2>
+    <blockquote>
+        "{{ quote.text }}"
+        <footer>— {{ quote.source }}</footer>
+    </blockquote>
+
+    <p>👁️ {{ quote.views }} | 👍 {{ quote.likes }} | 👎 {{ quote.dislikes }}</p>
+
+    <form action="{% url 'like_quote' quote.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">👍 Лайк</button>
+    </form>
+
+    <form action="{% url 'dislike_quote' quote.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">👎 Дизлайк</button>
+    </form>
+    <br>
+    <a href="{% url 'random_quote' %}">Следующая цитата</a>
+    <br>
+    <a href="{% url 'quote_list' %}">Список цитат</a>
+    <br>
+    <a href="{% url 'add_quote' %}">Добавить цитату</a>
+</body>
