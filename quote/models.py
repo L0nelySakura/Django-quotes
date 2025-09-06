@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 class Quote(models.Model):
     source = models.CharField(max_length=255)
-    text = models.TextField(unique=True)
+    text = models.TextField()
     weight = models.PositiveIntegerField(default=1)
     views = models.PositiveIntegerField(default=0)
     likes = models.IntegerField(default=0)
